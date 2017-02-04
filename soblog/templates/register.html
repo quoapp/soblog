@@ -1,0 +1,21 @@
+<!Doctype html>
+<html>
+<head>
+    <title>注册</title>
+    <style>
+
+    </style>
+</head>
+<body>
+<div class="register">
+    <h2>注册</h2>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ uf.as_p }}
+        <button class="btn btn-info" type="submit" style="margin:10px">
+            提交
+        </button>
+    </form>
+</div>
+</body>
+</html>

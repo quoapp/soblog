@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>发布博客</title>
+    <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+</head>
+<body>
+<!-- Container -->
+<div id="container">
+    <!--Header-->
+    <div id="header">
+        <div id="branding">
+            <h1 id="site-name">
+            <a href="/blogs/">学习之路</a>
+            </h1>
+        </div>
+        <div id="user-tools">
+            <!--<a href="#">Hello,{{ Userinfo.username }}</a>-->
+        </div>
+    </div>
+    <!--END Header-->
+    <!--Content-->
+    <div id="content">
+        <h2>发布博文</h2>
+        <div id="content-main">
+            <form id="blog_form" enctype="multipart/form-data" action="" method="post">
+                {% csrf_token %}
+                <div>
+                    <!--<div>{{ bf.catagory }}</div>-->
+                    <!--<div>{{ bf.title }}</div>-->
+                    <!--<div>{{ bf.author }}</div>-->
+                    <!--<div>{{ bf.content }}</div>-->
+                    <!--<div>{{ bf.tags }}</div>-->
+                    {{ bf.as_p}}
+                </div>
+                <input type="submit" value="保存并发布">
+            </form>
+        </div>
+    </div>
+    <!--END Content-->
+</div>
+</body>
+</html>
