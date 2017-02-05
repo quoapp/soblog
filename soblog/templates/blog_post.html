@@ -27,11 +27,6 @@
             <form id="blog_form" enctype="multipart/form-data" action="" method="post">
                 {% csrf_token %}
                 <div>
-                    <!--<div>{{ bf.catagory }}</div>-->
-                    <!--<div>{{ bf.title }}</div>-->
-                    <!--<div>{{ bf.author }}</div>-->
-                    <!--<div>{{ bf.content }}</div>-->
-                    <!--<div>{{ bf.tags }}</div>-->
                     {{ bf.as_p}}
                 </div>
                 <input type="submit" value="保存并发布">

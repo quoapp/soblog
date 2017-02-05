@@ -22,6 +22,10 @@
 <div class="header">
     <span><a href="{% url 'blog_get_detail' blog.id %}">{{ blog.title }}</a></span>
 </div>
+<!--再次编辑-->
+<a class="blog_edit" href="{% url 'blog_edit' blog.id %}">
+    <span class="glyphicon glyphicon-pencil">编辑</span>
+</a>
 
 <div class="content">
     <div class="blog">
@@ -40,7 +44,7 @@
             <h3>评论</h3>
             {% for comment in comments %}
                 <div class="comment-field" style="padding-top:10px;">
-                    {{ comment.name }} 说：{{ comment.content }}
+                    {{ comment.name }} 说：{{ comment }}
                 </div>
             {% endfor %}
         </div>

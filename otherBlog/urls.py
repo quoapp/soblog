@@ -27,5 +27,6 @@ urlpatterns = [
     url(r'^$', Register, name='register'),
     url(r'^register/$',Register,name='register'),
     url(r'^blog_post/$',Post_blog,name='blog_post'),
+    url(r'^blog/(\d+)/edit/$',Blog_edit,name='blog_edit')
     # url(r'^submit_success/$',name='submit_success') #缺view值
 ]

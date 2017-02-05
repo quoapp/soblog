@@ -17,7 +17,7 @@ class Tag(models.Model):
 class Userinfo(models.Model):
     username = models.CharField(max_length=16,verbose_name="用户名")
     password = models.CharField(max_length=16,verbose_name="密码")
-    email = models.EmailField(blank=True, null=True,verbose_name="邮箱")
+    email = models.EmailField(verbose_name="账户邮箱")
     # phone
     # sex = models.CharField('sex',choices=(("M","Male"),("F","Female")),max_length=7,blank=True, null=True,)
     #qq

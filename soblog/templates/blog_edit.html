@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<form action="" enctype="multipart/form-data" method="POST">
+    {% csrf_token %}
+    <div>
+        {{ bf.title }}
+    </div>
+    <div>
+        {{ bf.content }}
+    </div>
+    <div>
+        {{ bf.catagory }}
+    </div>
+    <div>
+        {{ bf.tags }}
+    </div>
+    <button type="submit">提交修改</button>
+</form>
+
+{% endblock %}
