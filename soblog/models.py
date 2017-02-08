@@ -4,7 +4,7 @@ import datetime
 from django.contrib.auth.models import User
 
 
-class Category(models.Model):
+class Catagory(models.Model):
     name = models.CharField(max_length = 30,verbose_name="分类")
     def __str__(self):
         return self.name
