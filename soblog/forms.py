@@ -5,15 +5,15 @@ from soblog.models import *
 class CommentForm(forms.ModelForm):
     class Meta:
         model = Comment
-        fields = ('name','content')
+        fields = ('name','content','created')
 
-class UserForm(forms.ModelForm):
-    class Meta:
-        model = Userinfo
-        fields = ('username','password','email')
-        # widgets = {
-        #     'password':forms.PasswordInput()
-        # }
+# class UserForm(forms.ModelForm):
+#     class Meta:
+#         model = Userinfo
+#         fields = ('username','password','email')
+#         # widgets = {
+#         #     'password':forms.PasswordInput()
+#         # }
 
 class BlogForm(forms.ModelForm):
       class Meta:

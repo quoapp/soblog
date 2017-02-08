@@ -22,10 +22,11 @@ admin.autodiscover()
 
 urlpatterns = [
     url(r'^admin/',admin.site.urls),
-    url(r'^blogs/$',get_blogs),
+    url(r'^blogs/$',get_blogs,name="blog_list"),
     url(r'^detail/(\d+)/$',get_details,name='blog_get_detail'),
-    url(r'^$', Register, name='register'),
-    url(r'^register/$',Register,name='register'),
+    url(r'^blog_login/$',blog_login,name='django.contrib.auth.views.login'),
+    url(r'^$', get_blogs,name="blog_list"),
+    # url(r'^register/$',Register,name='register'),
     url(r'^blog_post/$',Post_blog,name='blog_post'),
     url(r'^blog/(\d+)/edit/$',Blog_edit,name='blog_edit')
     # url(r'^submit_success/$',name='submit_success') #缺view值

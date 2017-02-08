@@ -1,69 +1,59 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title> {{ blog.title }} </title>
-    <style>
-        body{margin:0 10em;background-color:floralwhite}
-        div.header{font-size:35px;margin:0;padding:20px 0;}
-        div.info{margin:10px 0;}
-        .blog {
-            padding: 20px 0px;
-        }
-        .blog.info span {
-            padding-right:10px;
-        }
-        .blgo.summary {
-            padding-top:20px;
-        }
-    </style>
-</head>
-<body>
-<div class="header">
-    <span><a href="{% url 'blog_get_detail' blog.id %}">{{ blog.title }}</a></span>
+{% extends 'base.html' %}
+
+{% block title %}{{ blog.title }}学习之路{% endblock %}
+
+{% block content %}
+
+<div class="blog_title">
+    <span style="font-size:30px"><a href="{% url 'blog_get_detail' blog.id %}">{{ blog.title }}</a></span>
 </div>
 <!--再次编辑-->
 <a class="blog_edit" href="{% url 'blog_edit' blog.id %}">
     <span class="glyphicon glyphicon-pencil">编辑</span>
 </a>
 
-<div class="content">
+<div class="blog_content">
     <div class="blog">
-        <!--<div class="title">-->
-            <!--<a href="#"><h2>{{ blog.title }}</h2></a>-->
-        <!--</div>-->
         <div class="info">
-            <span class="category" style="color:#ff9900;">{{ blog.category }}</span>
-            <span class="author" style="color:#4a86e8">{{ blog.author }}</span>
-            <span class="created" style="color:#6aa84f">{{ blog.created|date:"Y-m-d H:i" }}</span>
+            <span class="category">{{ blog.category }}</span>
+            <span class="author">{{ blog.author }}</span>
+            <span class="created">{{ blog.created|date:"Y-m-d H:i" }}</span>
         </div>
         <div class="summary">{{ blog.content }}</div>
     </div>
     <div class="comment">
-        <div class="comments-display" style="padding:20px 0;margin:0">
+        <div class="comments-display" >
             <h3>评论</h3>
             {% for comment in comments %}
-                <div class="comment-field" style="padding-top:10px;">
+                <div class="comment-field">
                     {{ comment.name }} 说：{{ comment }}
                 </div>
             {% endfor %}
         </div>
-        <div class="comment-post" style="padding-top:10px;">
+        <div class="comment-post">
             <h3>提交评论</h3>
             <form action="{% url 'blog_get_detail' blog.id %}" method="post">
                 {% csrf_token %}
                 {% for field in form %}
-                    <div class="input-field" style="padding-top:10px">
-                        {{ field.label }}:{{ field }}
-                    </div>
-                    <div class="error" style="color:red;">
+                    <table class="input-field">
+                        <tr>
+                            <td>
+                                {{ field.label }}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                              {{ field }}
+                            </td>
+                        </tr>
+                    </table>
+                    <table class="error">
                         {{ field.error }}
-                    </div>
+                    </table>
                 {% endfor %}
-                <button type="submit" style="margin-top:10px">提交</button>
+                <button type="submit">提交</button>
             </form>
         </div>
     </div>
 </div>
-</body>
-</html>
+{% endblock %}

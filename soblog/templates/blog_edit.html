@@ -4,18 +4,24 @@
 
 <form action="" enctype="multipart/form-data" method="POST">
     {% csrf_token %}
-    <div>
-        {{ bf.title }}
-    </div>
-    <div>
-        {{ bf.content }}
-    </div>
-    <div>
-        {{ bf.catagory }}
-    </div>
-    <div>
-        {{ bf.tags }}
-    </div>
+    <table>
+        <tr>
+            <td>{{ bf.title.label_tag }}</td>
+            <td>{{ bf.title }}</td>
+        </tr>
+        <tr>
+            <td>{{ bf.content.label_tag }}</td>
+            <td>{{ bf.content }}</td>
+        </tr>
+        <tr>
+            <td>{{ bf.catagory.label_tag }}</td>
+            <td>{{ bf.catagory }}</td>
+        </tr>
+        <tr>
+            <td>{{ bf.tags.label_tag }}</td>
+            <td>{{ bf.tags }}</td>
+        </tr>
+    </table>
     <button type="submit">提交修改</button>
 </form>
 

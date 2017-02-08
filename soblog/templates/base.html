@@ -5,16 +5,40 @@
     <meta charset="UTF-8">
     <title>{% block title %}{% endblock %} 学习之路 </title>
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="{% static 'blog/css/style.css' %}">
+    <!--<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">-->
+    <!--<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>-->
+    <!--<link rel="stylesheet" href="{% static 'blog/css/style.css' %}">-->
+    <style>
+        div.header{margin:0;padding:0.5em 5em 1.5em 5em;background-color:brown}
+        div.content{margin:1em 12em;padding:1em; background-color:floralwhite}
+    </style>
 </head>
 <body>
-<h1 id="site-name">
-    <a href="/blogs/">学习之路</a>
-</h1>
-{% block content %}
+<!-- Container -->
+<div id="container">
+      <!--Header-->
+     <div class="header">
+        <div id="branding" class="branding">
+            <h1><a href="/blogs/">学习之路</a></h1>
+        </div>
+        <div class="user_login">
+            {% if user.is_authenticated %}
+            <a>hello,{{ user.username }}</a>
+            <a href="../blog_list/">退出</a>
+            {% else %}
+            <a href="../register/">注册</a>
+            <a href="../blog_login/">登陆</a>
+            {% endif %}
+        </div>
+    </div>
+     <!--END Header-->
+</div>
 
-{% endblock %}
+  <!--Content-->
+<div class="content">
+    {% block content %}
+
+    {% endblock %}
+</div>
 </body>
 </html>

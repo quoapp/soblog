@@ -1,25 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>发布博客</title>
-    <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
-</head>
-<body>
-<!-- Container -->
+{% extends 'base.html' %}
+
+{% block title %}发布博客{% endblock %}
+
+{% block content %}
 <div id="container">
-    <!--Header-->
-    <div id="header">
-        <div id="branding">
-            <h1 id="site-name">
-            <a href="/blogs/">学习之路</a>
-            </h1>
-        </div>
-        <div id="user-tools">
-            <!--<a href="#">Hello,{{ Userinfo.username }}</a>-->
-        </div>
-    </div>
-    <!--END Header-->
     <!--Content-->
     <div id="content">
         <h2>发布博文</h2>
@@ -35,5 +19,4 @@
     </div>
     <!--END Content-->
 </div>
-</body>
-</html>
+{% endblock %}

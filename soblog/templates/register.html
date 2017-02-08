@@ -1,12 +1,8 @@
-<!Doctype html>
-<html>
-<head>
-    <title>注册</title>
-    <style>
+{% extends 'base.html' %}
 
-    </style>
-</head>
-<body>
+{% block title %}注册，学习之路{% endblock %}
+
+{% block content %}
 <div class="register">
     <h2>注册</h2>
     <form method="post" enctype="multipart/form-data">
@@ -17,5 +13,4 @@
         </button>
     </form>
 </div>
-</body>
-</html>
+{% endblock %}
