@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load custom_markdown %}
 
 {% block title %}{{ blog.title }}学习之路{% endblock %}
 
@@ -19,7 +20,7 @@
             <span class="author">{{ blog.author }}</span>
             <span class="created">{{ blog.created|date:"Y-m-d H:i" }}</span>
         </div>
-        <div class="summary">{{ blog.content }}</div>
+        <div class="summary">{{ blog.content | custom_markdown }}</div>
     </div>
     <div class="comment">
         <div class="comments-display" >
@@ -43,7 +44,7 @@
                         </tr>
                         <tr>
                             <td>
-                              {{ field }}
+                                {{ field }}
                             </td>
                         </tr>
                     </table>

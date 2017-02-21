@@ -7,26 +7,19 @@ from django.shortcuts import redirect
 from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required
 from django.contrib import auth
-from django.contrib.auth.forms import AuthenticationForm
-#
-# def Register(request):
-#     if request.method == "POST":
-#         uf = UserForm(request.POST)
-#         if uf.is_valid():
-#             #获取新的注册信息表单
-#             username = uf.cleaned_data['username']
-#             password = uf.cleaned_data['password']
-#             email = uf.cleaned_data['email']
-#             #将表单写入数据库
-#             user = Userinfo()
-#             user.username = username
-#             user.password = password
-#             user.email = email
-#             user.save()
-#             return render_to_response('submit_success.html',{})
-#     else:
-#         uf = UserForm()
-#     return render(request,'register.html',{'uf':uf})
+from django.contrib.auth.forms import AuthenticationForm,UserCreationForm
+
+
+def Register(request):
+    if request.method == "POST":
+        uf = UserCreationForm(request.POST)
+        if uf.is_valid():
+            user = uf.save(commit=False)
+            user.save()
+            return render_to_response('submit_success.html',{})
+    else:
+        uf = UserCreationForm()
+    return render(request,'register.html',{'uf':uf})
 
 
 def blog_login(request):
@@ -45,7 +38,7 @@ def blog_login(request):
 
 
 def get_blogs(request):
-    blogs = Blog.objects.all().order_by('-created')
+    blogs = Blog.objects.all().order_by('-create_time')
     return render_to_response('blog_list.html',{'blogs':blogs})
 
 
@@ -102,3 +95,38 @@ def Blog_edit(request,blog_id):
     else:
         bf = BlogForm(instance=edit)
     return render(request,'blog_edit.html',{"bf":bf})
+
+
+@login_required
+def user_profile_view(request):
+    if request.method == 'POST':
+        form_type = request.POST.get('form_type',None)
+        if form_type == 'password':
+            user_form = MyPasswordChangeForm(request.user, request.POST )
+            if user_form.is_valid():
+                user_form.save()
+                return HttpResponseRedirect(reverse('user_profile'))
+            else:
+                user_profile = UserProfile.object.filter(user=request.user).first()
+                profile_form = UserProfileForm(instance=user_profile)
+        elif form_type == 'avatar':
+            user_profile = UserProfile.objects.get_or_create(user=request.user)[0]
+            profile_form = UserProfileForm(request.POST, request.FILES, instance=user_profile)
+            if profile_form.is_valid():
+                profile_form.save()
+                return HttpResponseRedirect(reverse('user_profile'))
+            else:
+                user_form = MyPasswordChangeForm(request.user)
+    else:
+        user_profile = UserProfile.objects.filter(user=request.user)
+        profile_form = UserProfileForm()
+        user_form = MyPasswordChangeForm(request.user)
+
+    return render(
+        request,
+        'userprofile.html',
+        {
+            'user_form':user_form,
+            'profile_form':profile_form,
+        }
+    )

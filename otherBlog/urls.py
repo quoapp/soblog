@@ -26,8 +26,9 @@ urlpatterns = [
     url(r'^detail/(\d+)/$',get_details,name='blog_get_detail'),
     url(r'^blog_login/$',blog_login,name='django.contrib.auth.views.login'),
     url(r'^$', get_blogs,name="blog_list"),
-    # url(r'^register/$',Register,name='register'),
+    url(r'^register/$',Register,name='register'),
     url(r'^blog_post/$',Post_blog,name='blog_post'),
-    url(r'^blog/(\d+)/edit/$',Blog_edit,name='blog_edit')
+    url(r'^blog/(\d+)/edit/$',Blog_edit,name='blog_edit'),
     # url(r'^submit_success/$',name='submit_success') #缺view值
+    url(r'^user_profile/$',user_profile_view,name='user_profile')
 ]

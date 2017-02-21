@@ -1,6 +1,17 @@
 from django.contrib import admin
-
-# Register your models here.
 from soblog.models import *
-#注册的目的就是为了让系统管理员能对注册的这类模型进行管理
-admin.site.register([Catagory,Tag,Blog])
+from pagedown.widgets import AdminPagedownWidget
+from django import forms
+
+class BlogForm(forms.ModelForm):
+    content = forms.CharField(widget=AdminPagedownWidget())
+
+    class Meta:
+        model = Blog
+        fields = '__all__'
+
+class BlogAdmin(admin.ModelAdmin):
+    form = BlogForm
+
+admin.site.register(Blog,BlogAdmin)
+admin.site.register(Catagory)

@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load custom_markdown %}
 
 {% block title %}发布博客{% endblock %}
 
@@ -10,9 +11,48 @@
         <div id="content-main">
             <form id="blog_form" enctype="multipart/form-data" action="" method="post">
                 {% csrf_token %}
-                <div>
-                    {{ bf.as_p}}
-                </div>
+                <table>
+                    <tr>
+                        <td>
+                            {{bf.catagory.label_tag}}
+                        </td>
+                        <td>
+                            {{bf.catagory}}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            {{bf.title.label_tag}}
+                        </td>
+                        <td>
+                            {{bf.title}}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            {{bf.author.label_tag}}
+                        </td>
+                        <td>
+                            {{bf.author}}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            {{bf.content.label_tag}}
+                        </td>
+                        <td>
+                            {{ bf.content|custom_markdown }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            {{bf.tags.label_tag}}
+                        </td>
+                        <td>
+                            {{bf.tags}}
+                        </td>
+                    </tr>
+                </table>
                 <input type="submit" value="保存并发布">
             </form>
         </div>

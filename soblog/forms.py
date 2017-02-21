@@ -1,31 +1,26 @@
 #coding:utf-8
 from django import forms
 from soblog.models import *
+from django.contrib.auth.forms import PasswordChangeForm
 
 class CommentForm(forms.ModelForm):
     class Meta:
         model = Comment
-        fields = ('name','content','created')
+        fields = ('content','created')
 
-# class UserForm(forms.ModelForm):
-#     class Meta:
-#         model = Userinfo
-#         fields = ('username','password','email')
-#         # widgets = {
-#         #     'password':forms.PasswordInput()
-#         # }
+class UserProfileForm(forms.ModelForm):
+    class Meta:
+        model = UserProfile
+        fields = ['avatar',]
 
 class BlogForm(forms.ModelForm):
-      class Meta:
+    class Meta:
         model = Blog
         fields = ('title','author','content','catagory','tags')
 
-# class CatagoryForm(ModelForm):
-#     class Meta:
-#         model = Catagory
-#         fields = ('name',)
-#
-# class TagForm(ModelForm):
-#     class Meta:
-#         model = Tag
-#         fields = ('name',)
+class MyPasswordChangeForm(PasswordChangeForm):
+    def __init__(self, *args, **kwargs):
+        super(MyPasswordChangeForm,self).__init__(*args, **kwargs)
+        self.fields['old_password'].widget = forms.PasswordInput(attrs={'class':'form-control'})
+        self.fields['new_password1'].widget = forms.PasswordInput(attrs={'class':'form-control'})
+        self.fields['new_password2'].widget = forms.PasswordInput(attrs={'class':'form-control'})
