@@ -64,27 +64,29 @@ class Catagory(models.Model):
 
 
 class Blog(models.Model):
-    author = models.ForeignKey(User, verbose_name='作者')
-    catagory = models.ForeignKey(Catagory, related_name="blog_catagory", verbose_name="分类")
+    author = models.ForeignKey(User, null=True,blank=True, verbose_name='作者')
+    catagory = models.ForeignKey(Catagory, null=True,blank=True,related_name="blog_catagory", verbose_name="分类")
 
-    title = models.CharField(max_length=200, verbose_name='标题')
-    alias = models.CharField(max_length=200, db_index=True, blank=True, null=True,
+    title = models.CharField(null=True,blank=True,max_length=200, verbose_name='标题')
+    alias = models.CharField(null=True,blank=True,max_length=200, db_index=True, blank=True, null=True,
                              verbose_name="英文标题", help_text="做伪静态url用")
-    tags = models.CharField(max_length=100,null=True,blank=True,
+    tags = models.CharField(null=True,blank=True,max_length=100,null=True,blank=True,
                                   verbose_name="标签",help_text="用英文逗号分割")
-    status = models.IntegerField(default=0,choices=STATUS.items(),verbose_name="状态")
-    is_top = models.BooleanField(default=False, verbose_name="置顶")
+    status = models.IntegerField(null=True,blank=True,default=0,choices=STATUS.items(),verbose_name="状态")
+    is_top = models.BooleanField(null=True,blank=True,default=False, verbose_name="置顶")
 
-    summary = models.TextField(verbose_name="摘要",max_length=1500)
-    content = models.TextField(verbose_name='文章正文rst/md格式', max_length=20000)
-    content_html = models.TextField(verbose_name="文章正文html",max_length=500)
+    summary = models.TextField(null=True,blank=True,verbose_name="摘要",max_length=1500)
+    content = models.TextField(null=True,blank=True,verbose_name='文章正文rst/md格式', max_length=20000)
+    content_html = models.TextField(null=True,blank=True,verbose_name="文章正文html",max_length=500)
 
-    view_times = models.IntegerField(default=0, verbose_name="浏览次数")
-    pub_time = models.DateTimeField(default=datetime.datetime.now, verbose_name="发布时间")
-    create_time = models.DateTimeField(default=datetime.datetime.now, editable=True, verbose_name='创建时间')
-    update_time = models.DateTimeField(default=datetime.datetime.now, verbose_name="更新时间")
-    is_md = models.BooleanField(default=False,verbose_name="是否为mardown格式")
-    is_old = models.BooleanField(default=False,verbose_name="是否为旧数据")
+    view_times = models.IntegerField(default=0,null=True,blank=True, verbose_name="浏览次数")
+    pub_time = models.DateTimeField(default=datetime.datetime.now, null=True,blank=True,verbose_name="发布时间")
+    create_time = models.DateTimeField(default=datetime.datetime.now, null=True,blank=True,editable=True, verbose_name='创建时间')
+    update_time = models.DateTimeField(default=datetime.datetime.now, null=True,blank=True,verbose_name="更新时间")
+    is_md = models.BooleanField(default=False,null=True,blank=True,verbose_name="是否为mardown格式")
+    is_old = models.BooleanField(default=False,null=True,blank=True,verbose_name="是否为旧数据")
+
+    blog_url = models.URLField(null=True,blank=True,verbose_name="链接地址")
 
     def __str__(self):
         return self.title
