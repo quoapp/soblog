@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'soblog',
     'pagedown',
+    'django.bin.otherBlog.blogspider',
 ]
 
 MIDDLEWARE = [

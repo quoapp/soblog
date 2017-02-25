@@ -2,12 +2,14 @@ from django.shortcuts import render,render_to_response
 #Create your views here.
 from soblog.models import *
 from soblog.forms import *
+from django.bin.otherBlog.blogspider import blogspider
 from django.http import Http404,HttpResponseRedirect
 from django.shortcuts import redirect
 from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required
 from django.contrib import auth
 from django.contrib.auth.forms import AuthenticationForm,UserCreationForm
+import time
 
 
 def Register(request):
@@ -37,9 +39,15 @@ def blog_login(request):
         return render(request,'blog_login.html',{'form':form})
 
 
+# def get_blogs(request):
+#     blogs = Blog.objects.all().order_by('-create_time')
+#     return render_to_response('blog_list.html',{'blogs':blogs})
+
 def get_blogs(request):
-    blogs = Blog.objects.all().order_by('-create_time')
-    return render_to_response('blog_list.html',{'blogs':blogs})
+    blogs = blogspider.get_item_info('python', 1, 2)
+    # print(blogs)
+    time.sleep(15)
+    return render_to_response('blog_list.html', {'blogs': blogs})
 
 
 def get_details(request,blog_id):

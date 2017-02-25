@@ -16,7 +16,7 @@ class UserProfileForm(forms.ModelForm):
 class BlogForm(forms.ModelForm):
     class Meta:
         model = Blog
-        fields = ('title','author','content','catagory','tags')
+        fields = ('title','author','content','catagory','tags','pub_time','blog_url')
 
 class MyPasswordChangeForm(PasswordChangeForm):
     def __init__(self, *args, **kwargs):
