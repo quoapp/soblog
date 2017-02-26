@@ -1,24 +1,18 @@
 from bs4 import BeautifulSoup
 import requests
 import time
-# from soblog.models import Blog
+import sys
+from soblog.models import Blog
 
-
+#获取分类与多页内部的博客列表的链接
 def get_blog_links(category, page):
     links = []
     base_url = 'http://www.cnblogs.com/cate/{}/#p{}'.format(category, page)
     wb_data = requests.get(base_url)
     soup = BeautifulSoup(wb_data.text, 'lxml')
-    # print (soup)
 
     for link in soup.select('a.titlelnk'):
         links.append(link.get('href'))
-        # y = Blog('blog_url':links)
-        # if y.is_valid():
-        #     y.save()
-        # else:
-        #     pass
-    # print(links)
     return links
 
 def get_more_links(category, start, end):
@@ -43,14 +37,19 @@ def get_item_info(category, start, end):
             'title': soup.select('.postTitle')[0].text if soup.find_all('h1','postTitle') else None,
             'content': soup.select('.postBody')[0].text if soup.find_all('div','postBody') else None,
             'create_time': soup.select('#post-date')[0].text,
-            'author': soup.select('.postDesc a')[0].text if soup.find_all('div','.postDesc a') else None,
-            'read_times': get_views_count(url),
-            'catagory': 'python'
+            # 'author': soup.select('.postDesc a')[0].text if soup.find_all('div','.postDesc a') else None, #外键
+            'view_times': get_views_count(url),
+            # 'catagory': 'python', #数据库表为外键，不能这样加入，
+            'blog_url': url
         }
         time.sleep(1)
-        return data
+        # return data
         # print(data)
+        try:    #整理存入数据库。mysql编码格式需调整。
+            y = Blog(**data)
+            y.save()
+            print('ok')
+        except:
+            print("fail to insert into db!")
 
 # get_item_info('python', 1, 2)
-
-# blog_info('http://www.cnblogs.com/Mr-wanwan/p/6439116.html')#test_url

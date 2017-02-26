@@ -1,8 +1,9 @@
+
 from django.shortcuts import render,render_to_response
 #Create your views here.
 from soblog.models import *
 from soblog.forms import *
-from django.bin.otherBlog.blogspider import blogspider
+from blogspider.blogspider import get_item_info
 from django.http import Http404,HttpResponseRedirect
 from django.shortcuts import redirect
 from django.core.urlresolvers import reverse
@@ -38,17 +39,11 @@ def blog_login(request):
         form = AuthenticationForm()
         return render(request,'blog_login.html',{'form':form})
 
-
-# def get_blogs(request):
-#     blogs = Blog.objects.all().order_by('-create_time')
-#     return render_to_response('blog_list.html',{'blogs':blogs})
-
 def get_blogs(request):
-    blogs = blogspider.get_item_info('python', 1, 2)
-    # print(blogs)
-    time.sleep(15)
-    return render_to_response('blog_list.html', {'blogs': blogs})
-
+    get_item_info('python', 1, 2) # 可行，但要放到后台
+    time.sleep(3)
+    blogs = Blog.objects.all().order_by('-create_time')
+    return render_to_response('blog_list.html',{'blogs':blogs})
 
 def get_details(request,blog_id):
     try:

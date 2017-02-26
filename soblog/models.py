@@ -12,7 +12,6 @@ STATUS = {
     2:'删除',
 }
 
-
 class UserProfile(models.Model):
     user = models.OneToOneField(User, related_name='profile')
     token = models.IntegerField(default=0)
@@ -67,10 +66,10 @@ class Blog(models.Model):
     author = models.ForeignKey(User, null=True,blank=True, verbose_name='作者')
     catagory = models.ForeignKey(Catagory, null=True,blank=True,related_name="blog_catagory", verbose_name="分类")
 
-    title = models.CharField(null=True,blank=True,max_length=200, verbose_name='标题')
+    title = models.CharField(blank=True, null=True, max_length=200, verbose_name='标题')
     alias = models.CharField(max_length=200, db_index=True, blank=True, null=True,
                              verbose_name="英文标题", help_text="做伪静态url用")
-    tags = models.CharField(null=True,blank=True,max_length=100,
+    tags = models.CharField(null=True, blank=True, max_length=100,
                                   verbose_name="标签",help_text="用英文逗号分割")
     status = models.IntegerField(null=True,blank=True,default=0,choices=STATUS.items(),verbose_name="状态")
     is_top = models.BooleanField(default=False, verbose_name="置顶")
@@ -141,6 +140,3 @@ class Comment(models.Model):
 
     def __str__(self):
         return self.content
-
-
-
