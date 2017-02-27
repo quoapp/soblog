@@ -79,6 +79,7 @@ class Blog(models.Model):
     content_html = models.TextField(null=True,blank=True,verbose_name="文章正文html",max_length=500)
 
     view_times = models.IntegerField(default=0,null=True,blank=True, verbose_name="浏览次数")
+    comment_times = models.IntegerField(default=0,null=True,blank=True, verbose_name="互动次数")
     pub_time = models.DateTimeField(default=datetime.datetime.now, null=True,blank=True,verbose_name="发布时间")
     create_time = models.DateTimeField(default=datetime.datetime.now, null=True,blank=True,editable=True, verbose_name='创建时间')
     update_time = models.DateTimeField(default=datetime.datetime.now, null=True,blank=True,verbose_name="更新时间")
@@ -132,7 +133,6 @@ def check_or_update_post_alias(sender,instance = None, **kwargs):
 
 
 class Comment(models.Model):
-
     blog = models.ForeignKey(Blog,verbose_name='文章')
     name = models.ForeignKey(User,verbose_name='评论人')
     content = models.TextField(max_length=240, verbose_name='评论内容')
@@ -140,3 +140,6 @@ class Comment(models.Model):
 
     def __str__(self):
         return self.content
+    class Meta:
+        ordering = ['-created']
+        verbose_name_plural = verbose_name = "评论"

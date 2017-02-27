@@ -40,7 +40,7 @@ def blog_login(request):
         return render(request,'blog_login.html',{'form':form})
 
 def get_blogs(request):
-    get_item_info('python', 1, 2) # 可行，但要放到后台
+    get_item_info('python', 1, 20) # 可行，但要放到后台。读取出来内容为html格式，template需要调整
     time.sleep(3)
     blogs = Blog.objects.all().order_by('-create_time')
     return render_to_response('blog_list.html',{'blogs':blogs})
