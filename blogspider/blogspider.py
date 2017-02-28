@@ -11,7 +11,8 @@ def get_blog_links(category, start, end):
 
     try:
         for page in range(start, end):
-            base_url = 'http://www.cnblogs.com/cate/{}/{}'.format(category, str(page)) #曾经栽在这里#p，让我错误的怀疑for循环问题。
+            base_url = 'http://www.cnblogs.com/cate/{}/{}'.format(category, str(page))
+            #曾经栽在这里#p，让我错误的怀疑for循环问题。
             print('loading..',base_url)
             wb_data = requests.get(base_url)
             soup = BeautifulSoup(wb_data.text, 'lxml')
@@ -60,6 +61,7 @@ def get_item_info(category, start, end):
     count=0
     for slink in urls:
         wb_data = requests.get(slink)
+        time.sleep(13)
         soup = BeautifulSoup(wb_data.text,'lxml')
         data = {
             'title': soup.select('.postTitle a')[0].text if soup.find_all(attrs={'class':'postTitle'}) else None,
@@ -71,7 +73,7 @@ def get_item_info(category, start, end):
             'blog_url': slink,
             'comment_times':get_comment_count(slink),
         }
-        time.sleep(3)
+
         try:    #整理存入数据库。注意mysql编码格式需调整。
             y = Blog(**data)
             y.save()

@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% load custom_markdown %}
+<!--{% load custom_markdown %}-->
 
 {% block title %}首页{% endblock %}
 
@@ -20,9 +20,13 @@
                 <span class="catagory" style="color:#ff9900;">{{ blog.catagory }}</span>
                 <span class="author" style="color:#4a86e8;">{{ blog.author }}</span>
                 <span class="created" style="color:#6aa84e;">{{ blog.create_time | date:"Y-m-d H:i" }}</span>
+                <span class="view_times" style="color:#f3453a;">阅读({{ blog.view_times }})</span>
+                <span class="comment_times" style="color:#5a103d;">评论({{ blog.comment_times }})</span>
             </div>
             <div class="summary" style="padding:50px 0;">
-                {{ blog.content | truncatechars:150 | custom_markdown }}
+                <!--{{ blog.content | truncatechars:200 | custom_markdown }}-->
+                <!--#无markdown格式-->
+                {{ blog.content | truncatechars:200 }}
             </div>
         </div>
     {% endfor %}
