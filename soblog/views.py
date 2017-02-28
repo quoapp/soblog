@@ -10,7 +10,6 @@ from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required
 from django.contrib import auth
 from django.contrib.auth.forms import AuthenticationForm,UserCreationForm
-import time
 
 
 def Register(request):
@@ -41,7 +40,6 @@ def blog_login(request):
 
 def get_blogs(request):
     get_item_info('python', 1, 20) # 可行，但要放到后台。读取出来内容为html格式，template需要调整
-    time.sleep(3)
     blogs = Blog.objects.all().order_by('-create_time')
     return render_to_response('blog_list.html',{'blogs':blogs})
 
