@@ -24,16 +24,13 @@ def get_data_from():
 def data_show():
     y = []
     for data in get_data_from():
-        # print(data)
-        # x = [data['create_time']]
-        # print(x)
         y.append(data['view_times'])
     return y
 
 y = data_show()
 x = range(2000, 2030)
 plt.figure()
-plt.plot(x, y, color='green')
+plt.plot(x, y, 'ro', color='green',)
 plt.show()
 
 
