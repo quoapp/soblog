@@ -1,7 +1,6 @@
 from bs4 import BeautifulSoup
 import requests
 import time
-import sys
 from soblog.models import Blog
 
 #获取分类与多页内部的博客列表的链接

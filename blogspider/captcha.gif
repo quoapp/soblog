@@ -1,0 +1,3 @@
+<html><body><h1>500 Server Error</h1>
+An internal server error occured.
+</body></html>
